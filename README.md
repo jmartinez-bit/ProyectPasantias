@@ -1,1 +1,1 @@
-# ProyectPasantias
+# ProyectoPasantias
