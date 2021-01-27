@@ -6,40 +6,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import aplicaciones.spring.models.Categoria;
-import aplicaciones.spring.models.dao.ICategoriaDao;
+import aplicaciones.spring.models.Pago;
+import aplicaciones.spring.models.dao.IPagoDao;
 
 @Service
-public class CategoriaServiceImpl implements ICategoriaService{
+public class PagoServiceImpl implements IPagoService{
 	
 	@Autowired
-	private ICategoriaDao categoriaDao;
+	private IPagoDao pagoDao;
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Categoria> findAll() {
-		// TODO Auto-generated method stub
-		return (List<Categoria>) categoriaDao.findAll();
+	public List<Pago> findAll() {
+		return (List<Pago>) pagoDao.findAll();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Categoria findById(Long id) {
+	public Pago findById(Long id) {
 		// TODO Auto-generated method stub
-		return categoriaDao.findById(id).orElse(null);
+		return pagoDao.findById(id).orElse(null);
 	}
 
 	@Override
 	@Transactional
-	public Categoria save(Categoria categoria) {
+	public Pago save(Pago pago) {
 		// TODO Auto-generated method stub
-		return categoriaDao.save(categoria);
+		return pagoDao.save(pago);
 	}
 
 	@Override
 	@Transactional
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
-		categoriaDao.deleteById(id);
+		pagoDao.deleteById(id);
 	}
+
 }

@@ -24,6 +24,7 @@ import aplicaciones.spring.security.services.UserDetailsServiceImpl;
 		// securedEnabled = true,
 		// jsr250Enabled = true,
 		prePostEnabled = true)
+//@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	UserDetailsServiceImpl userDetailsService;
