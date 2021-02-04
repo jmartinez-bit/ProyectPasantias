@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Pago  implements Serializable {
@@ -26,6 +28,10 @@ public class Pago  implements Serializable {
 	@Column(name="num_operacion")
 	private String numOperacion;
 	private String banco;
+	
+	@OneToOne
+	@JoinColumn(name = "gasto_id")
+	private Gasto gastoId;
 		
 	public Long getId() {
 		return id;
@@ -85,6 +91,14 @@ public class Pago  implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public Gasto getGastoId() {
+		return gastoId;
+	}
+
+	public void setGastoId(Gasto gastoId) {
+		this.gastoId = gastoId;
 	}
 
 	/**

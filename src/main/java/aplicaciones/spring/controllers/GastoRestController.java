@@ -56,7 +56,6 @@ public class GastoRestController {
 		gastoActual.setFechaVenc(gasto.getFechaVenc());
 		gastoActual.setIgv(gasto.getIgv());
 		gastoActual.setNumDocumento(gasto.getNumDocumento());
-		gastoActual.setPagoId(gasto.getPagoId());
 		gastoActual.setPrecioVenta(gasto.getPrecioVenta());
 		gastoActual.setTipoDocumento(gasto.getTipoDocumento());
 		gastoActual.setTipoGastoId(gasto.getTipoGastoId());

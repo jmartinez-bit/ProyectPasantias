@@ -53,6 +53,7 @@ public class PagoRestController {
 		pagoActual.setNumCheque(pago.getNumOperacion());
 		pagoActual.setNumOperacion(pago.getNumOperacion());
 		pagoActual.setTitularTarjeta(pago.getTitularTarjeta());
+		pagoActual.setGastoId(pago.getGastoId());
 		
 		return pagoService.save(pagoActual);
 	}

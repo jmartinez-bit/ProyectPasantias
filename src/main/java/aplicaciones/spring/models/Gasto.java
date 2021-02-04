@@ -50,9 +50,6 @@ public class Gasto implements Serializable {
 	@JoinColumn(name = "concepto_id")
 	private Concepto conceptoId;
 	
-	@OneToOne
-	@JoinColumn(name = "pago_id")
-	private Pago pagoId;
 
 	public Long getId() {
 		return id;
@@ -164,14 +161,6 @@ public class Gasto implements Serializable {
 
 	public void setConceptoId(Concepto conceptoId) {
 		this.conceptoId = conceptoId;
-	}
-
-	public Pago getPagoId() {
-		return pagoId;
-	}
-
-	public void setPagoId(Pago pagoId) {
-		this.pagoId = pagoId;
 	}
 	
 }
