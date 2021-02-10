@@ -42,4 +42,11 @@ public class ProveedorServiceImpl implements IProveedorService{
 		proveedorDao.deleteById(id);
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public Long obtenerIdUltimo() {
+		Proveedor proveedor = proveedorDao.findTopByOrderByIdDesc();
+		return proveedor.getId();
+	}
+
 }

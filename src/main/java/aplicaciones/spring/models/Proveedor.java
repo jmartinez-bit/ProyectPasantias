@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Proveedor implements Serializable{
@@ -21,6 +24,10 @@ public class Proveedor implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotEmpty
+	@Column(nullable = false, unique = true)
+	private String codigo;
+	
 	@Column(name="ruc_dni")
 	private String rucDni;
 	
@@ -28,6 +35,7 @@ public class Proveedor implements Serializable{
 	private String razonSocial;
 	
 	@Column(name = "fecha_ini")
+	@Temporal(TemporalType.DATE)
 	private Date fechaIni;
 	
 	@Column(name="rubro_actividad")
@@ -41,11 +49,32 @@ public class Proveedor implements Serializable{
 	
 	private String distrito;
 	private String pais;
-	private String direccion_s;
-	private String departamento_s;
-	private String provincia_s;
-	private String distrito_s;
-	private String pais_s;
+	private String ubigeo;
+	
+	@Column(name="direccion_dos")
+	private String direccionDos;
+	
+	@Column(name="departamento_dos")
+	private String departamentoDos;
+	
+	@Column(name="provincia_dos")
+	private String provinciaDos;
+	
+	@Column(name="distrito_dos")
+	private String distritoDos;
+	
+	@Column(name="pais_dos")
+	private String paisDos;
+	
+	@Column(name="ubigeo_dos")
+	private String ubigeoDos;
+	
+	@Column(name="impuesto_asociado")
+	private String impuestoAsociado;
+	
+	@Column(name="tipo_pago")
+	private String tipoPago;
+	
 	private String comentarios;
 	
 	public Long getId() {
@@ -102,35 +131,35 @@ public class Proveedor implements Serializable{
 	public void setPais(String pais) {
 		this.pais = pais;
 	}
-	public String getDireccion_s() {
-		return direccion_s;
+	public String getDireccionDos() {
+		return direccionDos;
 	}
-	public void setDireccion_s(String direccion_s) {
-		this.direccion_s = direccion_s;
+	public void setDireccionDos(String direccionDos) {
+		this.direccionDos = direccionDos;
 	}
-	public String getDepartamento_s() {
-		return departamento_s;
+	public String getDepartamentoDos() {
+		return departamentoDos;
 	}
-	public void setDepartamento_s(String departamento_s) {
-		this.departamento_s = departamento_s;
+	public void setDepartamentoDos(String departamentoDos) {
+		this.departamentoDos = departamentoDos;
 	}
-	public String getProvincia_s() {
-		return provincia_s;
+	public String getProvinciaDos() {
+		return provinciaDos;
 	}
-	public void setProvincia_s(String provincia_s) {
-		this.provincia_s = provincia_s;
+	public void setProvinciaDos(String provinciaDos) {
+		this.provinciaDos = provinciaDos;
 	}
-	public String getDistrito_s() {
-		return distrito_s;
+	public String getDistritoDos() {
+		return distritoDos;
 	}
-	public void setDistrito_s(String distrito_s) {
-		this.distrito_s = distrito_s;
+	public void setDistritoDos(String distritoDos) {
+		this.distritoDos = distritoDos;
 	}
-	public String getPais_s() {
-		return pais_s;
+	public String getPaisDos() {
+		return paisDos;
 	}
-	public void setPais_s(String pais_s) {
-		this.pais_s = pais_s;
+	public void setPaisDos(String paisDos) {
+		this.paisDos = paisDos;
 	}
 	public String getComentarios() {
 		return comentarios;
@@ -143,5 +172,35 @@ public class Proveedor implements Serializable{
 	}
 	public void setFechaIni(Date fechaIni) {
 		this.fechaIni = fechaIni;
+	}
+	public String getUbigeo() {
+		return ubigeo;
+	}
+	public void setUbigeo(String ubigeo) {
+		this.ubigeo = ubigeo;
+	}
+	public String getUbigeoDos() {
+		return ubigeoDos;
+	}
+	public void setUbigeoDos(String ubigeoDos) {
+		this.ubigeoDos = ubigeoDos;
+	}
+	public String getImpuestoAsociado() {
+		return impuestoAsociado;
+	}
+	public void setImpuestoAsociado(String impuestoAsociado) {
+		this.impuestoAsociado = impuestoAsociado;
+	}
+	public String getTipoPago() {
+		return tipoPago;
+	}
+	public void setTipoPago(String tipoPago) {
+		this.tipoPago = tipoPago;
+	}
+	public String getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 }

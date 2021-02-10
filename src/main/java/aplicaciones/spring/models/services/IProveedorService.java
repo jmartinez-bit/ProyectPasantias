@@ -13,4 +13,6 @@ public interface IProveedorService {
 	public Proveedor save(Proveedor proveedor);
 	
 	public void delete(Long id);
+	
+	public Long obtenerIdUltimo();
 }
