@@ -1,5 +1,7 @@
 package aplicaciones.spring.models;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,7 +12,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="persona_contacto")
-public class PersonaContacto {
+public class PersonaContacto implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -24,6 +31,10 @@ public class PersonaContacto {
 	@ManyToOne
 	@JoinColumn(name = "proveedor_id")
 	private Proveedor proveedorId;
+	
+	@ManyToOne
+	@JoinColumn(name = "cliente_id")
+	private Cliente clienteId;
 
 	public Long getId() {
 		return id;
@@ -72,4 +83,13 @@ public class PersonaContacto {
 	public void setProveedorId(Proveedor proveedorId) {
 		this.proveedorId = proveedorId;
 	}
+
+	public Cliente getClienteId() {
+		return clienteId;
+	}
+
+	public void setClienteId(Cliente clienteId) {
+		this.clienteId = clienteId;
+	}
+	
 }
