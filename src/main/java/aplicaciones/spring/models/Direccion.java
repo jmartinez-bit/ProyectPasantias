@@ -20,7 +20,7 @@ public class Direccion implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	
+	private String direccion;
 	private String pais;
 	private String departamento;
 	private String provincia;
@@ -30,6 +30,15 @@ public class Direccion implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente clienteId;
+
+	
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
 
 	public String getPais() {
 		return pais;

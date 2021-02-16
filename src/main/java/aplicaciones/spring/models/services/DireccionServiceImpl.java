@@ -87,16 +87,17 @@ public class DireccionServiceImpl implements IDireccionService{
 	public List<Direccion> updateDireccion(List<Direccion> direccionEdit, List<Direccion> direccionActual, Cliente clienteActual) {
 		// TODO Auto-generated method stub
 		int size = direccionActual.size();
-		
+
 		for(int i=0; i<direccionEdit.size(); i++) {
 			if (i < size) {
 				if(direccionEdit.get(i).getId() != null) {					
-					if(existDireccion(direccionActual, direccionEdit.get(i).getId())) {					
+					if(existDireccion(direccionActual, direccionEdit.get(i).getId())) {	
+						direccionActual.get(i).setDireccion(direccionEdit.get(i).getDireccion());
 						direccionActual.get(i).setDepartamento(direccionEdit.get(i).getDepartamento());
 						direccionActual.get(i).setDistrito(direccionEdit.get(i).getDistrito());
 						direccionActual.get(i).setPais(direccionEdit.get(i).getPais());
 						direccionActual.get(i).setProvincia(direccionEdit.get(i).getProvincia());
-						direccionActual.get(i).setUbigeo(direccionEdit.get(i).getUbigeo());
+						direccionActual.get(i).setUbigeo(direccionEdit.get(i).getUbigeo());					
 					} else {
 						direccionEdit.get(i).setClienteId(clienteActual);
 						direccionActual.add(direccionEdit.get(i));
