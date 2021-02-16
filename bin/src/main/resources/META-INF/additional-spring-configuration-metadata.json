@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "food.app.jwtSecret",
+    "type": "java.lang.String",
+    "description": "A description for 'food.app.jwtSecret'"
+  },
+  {
+    "name": "food.app.jwtExpirationMs",
+    "type": "java.lang.String",
+    "description": "A description for 'food.app.jwtExpirationMs'"
+  }
+]}
