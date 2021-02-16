@@ -30,7 +30,10 @@ public class Direccion implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente clienteId;
-
+	
+	@ManyToOne
+	@JoinColumn(name = "proveedor_id")
+	private Proveedor proveedorId;
 	
 	public String getDireccion() {
 		return direccion;
@@ -94,6 +97,14 @@ public class Direccion implements Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Proveedor getProveedorId() {
+		return proveedorId;
+	}
+
+	public void setProveedorId(Proveedor proveedorId) {
+		this.proveedorId = proveedorId;
 	}
 
 }

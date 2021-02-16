@@ -41,34 +41,6 @@ public class Proveedor implements Serializable{
 	@Column(name="rubro_actividad")
 	private String rubroActividad;
 	
-	private String direccion;
-	
-	private String departamento;
-	
-	private String provincia;
-	
-	private String distrito;
-	private String pais;
-	private String ubigeo;
-	
-	@Column(name="direccion_dos")
-	private String direccionDos;
-	
-	@Column(name="departamento_dos")
-	private String departamentoDos;
-	
-	@Column(name="provincia_dos")
-	private String provinciaDos;
-	
-	@Column(name="distrito_dos")
-	private String distritoDos;
-	
-	@Column(name="pais_dos")
-	private String paisDos;
-	
-	@Column(name="ubigeo_dos")
-	private String ubigeoDos;
-	
 	@Column(name="impuesto_asociado")
 	private String impuestoAsociado;
 	
@@ -101,66 +73,6 @@ public class Proveedor implements Serializable{
 	public void setRubroActividad(String rubroActividad) {
 		this.rubroActividad = rubroActividad;
 	}
-	public String getDireccion() {
-		return direccion;
-	}
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
-	public String getDepartamento() {
-		return departamento;
-	}
-	public void setDepartamento(String departamento) {
-		this.departamento = departamento;
-	}
-	public String getProvincia() {
-		return provincia;
-	}
-	public void setProvincia(String provincia) {
-		this.provincia = provincia;
-	}
-	public String getDistrito() {
-		return distrito;
-	}
-	public void setDistrito(String distrito) {
-		this.distrito = distrito;
-	}
-	public String getPais() {
-		return pais;
-	}
-	public void setPais(String pais) {
-		this.pais = pais;
-	}
-	public String getDireccionDos() {
-		return direccionDos;
-	}
-	public void setDireccionDos(String direccionDos) {
-		this.direccionDos = direccionDos;
-	}
-	public String getDepartamentoDos() {
-		return departamentoDos;
-	}
-	public void setDepartamentoDos(String departamentoDos) {
-		this.departamentoDos = departamentoDos;
-	}
-	public String getProvinciaDos() {
-		return provinciaDos;
-	}
-	public void setProvinciaDos(String provinciaDos) {
-		this.provinciaDos = provinciaDos;
-	}
-	public String getDistritoDos() {
-		return distritoDos;
-	}
-	public void setDistritoDos(String distritoDos) {
-		this.distritoDos = distritoDos;
-	}
-	public String getPaisDos() {
-		return paisDos;
-	}
-	public void setPaisDos(String paisDos) {
-		this.paisDos = paisDos;
-	}
 	public String getComentarios() {
 		return comentarios;
 	}
@@ -172,18 +84,6 @@ public class Proveedor implements Serializable{
 	}
 	public void setFechaIni(Date fechaIni) {
 		this.fechaIni = fechaIni;
-	}
-	public String getUbigeo() {
-		return ubigeo;
-	}
-	public void setUbigeo(String ubigeo) {
-		this.ubigeo = ubigeo;
-	}
-	public String getUbigeoDos() {
-		return ubigeoDos;
-	}
-	public void setUbigeoDos(String ubigeoDos) {
-		this.ubigeoDos = ubigeoDos;
 	}
 	public String getImpuestoAsociado() {
 		return impuestoAsociado;

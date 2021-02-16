@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import aplicaciones.spring.models.CuentaBancaria;
+import aplicaciones.spring.models.Direccion;
 import aplicaciones.spring.models.FormProveedor;
 import aplicaciones.spring.models.PersonaContacto;
 import aplicaciones.spring.models.Proveedor;
 import aplicaciones.spring.models.services.ICuentaBancariaService;
+import aplicaciones.spring.models.services.IDireccionService;
 import aplicaciones.spring.models.services.IPersonaContactoService;
 import aplicaciones.spring.models.services.IProveedorService;
 
@@ -40,6 +42,9 @@ public class ProveedorRestController {
 	@Autowired
 	private ICuentaBancariaService cuentaBancariaService;
 	
+	@Autowired
+	private IDireccionService direccionService;
+	
 	@GetMapping("/proveedores")
 	public List<Proveedor> index() {
 		return proveedorService.findAll();
@@ -55,65 +60,113 @@ public class ProveedorRestController {
 	}
 	
 	@GetMapping("/proveedores/{id}")
-	public Proveedor show(@PathVariable Long id) {
-		return proveedorService.findById(id);
+	public ResponseEntity<?> show(@PathVariable Long id) {
+		Map<String, Object> response = new HashMap<>();
+		
+		Proveedor proveedor = proveedorService.findById(id);
+		List<Direccion> direcciones = direccionService.findByProveedorId(proveedor);
+		List<PersonaContacto> personas = personaContactoService.findByProveedorId(proveedor);
+		List<CuentaBancaria> cuentas = cuentaBancariaService.findByProveedorId(proveedor);
+		
+		response.put("proveedor", proveedor);
+		response.put("direccion", direcciones);
+		response.put("personaContacto", personas);
+		response.put("cuentaBancaria", cuentas);
+		
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
 	
 	@PostMapping("/proveedores")
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<?> create( @RequestBody FormProveedor formproveedor) {
+	public ResponseEntity<?> create( @RequestBody FormProveedor proveedor) {
 		
 		Map<String, Object> response = new HashMap<>();
-		Proveedor proveedorNuevo = proveedorService.save(formproveedor.getProveedor());
+		Proveedor proveedorNuevo = proveedorService.save(proveedor.getProveedor());
 		
-		PersonaContacto personaContacto = formproveedor.getPersonaContacto();
-		CuentaBancaria cuentaBancaria = formproveedor.getCuentaBancaria();
+		List<Direccion> direcciones = proveedor.getDireccion();
+		List<Direccion> direccionesNuevas = null;
+		if(direcciones != null) {
+			for(Direccion direccion : direcciones) {
+				direccion.setProveedorId(proveedorNuevo);
+			}
+			direccionesNuevas = direccionService.saveDireccion(direcciones);
+		}
 		
-		personaContacto.setProveedorId(proveedorNuevo);
-		cuentaBancaria.setProveedorId(proveedorNuevo);
+		List<PersonaContacto> personas = proveedor.getPersonaContacto();
+		List<PersonaContacto> personasNuevas = null;
+		if(personas != null) {
+			for(PersonaContacto persona : personas) {
+				persona.setProveedorId(proveedorNuevo);
+			}
+			personasNuevas = personaContactoService.savePersonas(personas);
+		}
 		
-		PersonaContacto personaContactoNuevo = personaContactoService.save(personaContacto);
-		CuentaBancaria cuentaBancariaNuevo = cuentaBancariaService.save(cuentaBancaria);
+		List<CuentaBancaria> cuentas = proveedor.getCuentaBancaria();
+		List<CuentaBancaria> cuentasNuevas = null;
+		if(cuentas != null) {
+			for(CuentaBancaria cuenta : cuentas) {
+				cuenta.setProveedorId(proveedorNuevo);
+			}
+			cuentasNuevas = cuentaBancariaService.saveCuentas(cuentas);
+		}
 		
 		response.put("proveedor", proveedorNuevo);
-		response.put("personaContacto", personaContactoNuevo);
-		response.put("cuentaBancaria", cuentaBancariaNuevo);
+		response.put("direccion", direccionesNuevas);
+		response.put("cuentaBancaria", cuentasNuevas);
+		response.put("personaContacto", personasNuevas);
 		
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/proveedores/{id}")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Proveedor update(@RequestBody Proveedor proveedor, @PathVariable Long id) {
+	public ResponseEntity<?> update(@RequestBody FormProveedor proveedor, @PathVariable Long id) {
+		
+		Map<String, Object> response = new HashMap<>();
+		
+		Proveedor proveedorEdit = proveedor.getProveedor();
 		Proveedor proveedorActual = proveedorService.findById(id);
 		
-		proveedorActual.setComentarios(proveedor.getComentarios());
-		proveedorActual.setDepartamento(proveedor.getDepartamento());
-		proveedorActual.setDepartamentoDos(proveedor.getDepartamentoDos());
-		proveedorActual.setDireccion(proveedor.getDireccion());
-		proveedorActual.setDireccionDos(proveedor.getDireccionDos());
-		proveedorActual.setDistrito(proveedor.getDistrito());
-		proveedorActual.setDistritoDos(proveedor.getDistritoDos());
-		proveedorActual.setFechaIni(proveedor.getFechaIni());
-		proveedorActual.setPais(proveedor.getPais());
-		proveedorActual.setPaisDos(proveedor.getPaisDos());
-		proveedorActual.setProvincia(proveedor.getProvincia());
-		proveedorActual.setProvinciaDos(proveedor.getProvinciaDos());
-		proveedorActual.setRazonSocial(proveedor.getRazonSocial());
-		proveedorActual.setRubroActividad(proveedor.getRubroActividad());
-		proveedorActual.setRucDni(proveedor.getRucDni());
+		proveedorActual.setComentarios(proveedorEdit.getComentarios());
+		proveedorActual.setFechaIni(proveedorEdit.getFechaIni());
+		proveedorActual.setRazonSocial(proveedorEdit.getRazonSocial());
+		proveedorActual.setRubroActividad(proveedorEdit.getRubroActividad());
+		proveedorActual.setRucDni(proveedorEdit.getRucDni());
 		
-		proveedorActual.setUbigeo(proveedor.getUbigeo());
-		proveedorActual.setUbigeoDos(proveedor.getUbigeoDos());
-		proveedorActual.setImpuestoAsociado(proveedor.getImpuestoAsociado());
-		proveedorActual.setTipoPago(proveedor.getTipoPago());
+		proveedorActual.setImpuestoAsociado(proveedorEdit.getImpuestoAsociado());
+		proveedorActual.setTipoPago(proveedorEdit.getTipoPago());
 		
-		return proveedorService.save(proveedorActual);
+		// Actualización para direcciones
+		List<Direccion> direccionEdit = proveedor.getDireccion();
+		List<Direccion> direccionActual = direccionService.findByProveedorId(proveedorActual);
+		List<Direccion> direccionUpdated = direccionService.updateDireccion(direccionEdit, direccionActual, proveedorActual);
+		
+		// Actualización para personaContacto
+		List<PersonaContacto> personaContactoEdit = proveedor.getPersonaContacto();
+		List<PersonaContacto> personaContactoActual = personaContactoService.findByProveedorId(proveedorActual);
+		List<PersonaContacto> personaContactoUpdated = personaContactoService.updatePersona(personaContactoEdit, personaContactoActual, proveedorActual);
+		
+		// Actualización para cuentaBancaria
+		List<CuentaBancaria> cuentaBancariaEdit = proveedor.getCuentaBancaria();
+		List<CuentaBancaria> cuentaBancariaActual = cuentaBancariaService.findByProveedorId(proveedorActual);
+		List<CuentaBancaria> cuentaBancariaUpdated = cuentaBancariaService.updateCuenta(cuentaBancariaEdit, cuentaBancariaActual, proveedorActual);
+		
+		Proveedor proveedorUpdated = proveedorService.save(proveedorActual);
+		response.put("proveedor", proveedorUpdated);
+		response.put("direccion", direccionUpdated);
+		response.put("personaContacto", personaContactoUpdated);
+		response.put("cuentaBancaria", cuentaBancariaUpdated);
+		
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping("/proveedores/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Long id) {
+		Proveedor proveedor = proveedorService.findById(id);
+		direccionService.deleteByProveedorId(proveedor);
+		personaContactoService.deleteByProveedorId(proveedor);
+		cuentaBancariaService.deleteByProveedorId(proveedor);
 		proveedorService.delete(id);
 	}
 

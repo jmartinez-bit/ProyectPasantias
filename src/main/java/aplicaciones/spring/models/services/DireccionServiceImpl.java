@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import aplicaciones.spring.models.Cliente;
 import aplicaciones.spring.models.Direccion;
+import aplicaciones.spring.models.Proveedor;
 import aplicaciones.spring.models.dao.IDireccionDao;
 
 @Service
@@ -136,6 +137,70 @@ public class DireccionServiceImpl implements IDireccionService{
 	public void deleteByClienteId(Cliente cliente) {
 		// TODO Auto-generated method stub
 		direccionDao.deleteByClienteId(cliente);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Direccion> findByProveedorId(Proveedor proveedorId) {
+		// TODO Auto-generated method stub
+		return direccionDao.findByProveedorId(proveedorId);
+	}
+
+	@Override
+	@Transactional
+	public List<Direccion> updateDireccion(List<Direccion> direccionEdit, List<Direccion> direccionActual,
+			Proveedor proveedorActual) {
+		// TODO Auto-generated method stub
+		int size = direccionActual.size();
+
+		for(int i=0; i<direccionEdit.size(); i++) {
+			if (i < size) {
+				if(direccionEdit.get(i).getId() != null) {					
+					if(existDireccion(direccionActual, direccionEdit.get(i).getId())) {	
+						direccionActual.get(i).setDireccion(direccionEdit.get(i).getDireccion());
+						direccionActual.get(i).setDepartamento(direccionEdit.get(i).getDepartamento());
+						direccionActual.get(i).setDistrito(direccionEdit.get(i).getDistrito());
+						direccionActual.get(i).setPais(direccionEdit.get(i).getPais());
+						direccionActual.get(i).setProvincia(direccionEdit.get(i).getProvincia());
+						direccionActual.get(i).setUbigeo(direccionEdit.get(i).getUbigeo());					
+					} else {
+						direccionEdit.get(i).setProveedorId(proveedorActual);
+						direccionActual.add(direccionEdit.get(i));
+					}
+				}else {
+					direccionEdit.get(i).setProveedorId(proveedorActual);
+					direccionActual.add(direccionEdit.get(i));
+				}
+			}else {
+				direccionEdit.get(i).setProveedorId(proveedorActual);
+				direccionActual.add(direccionEdit.get(i));
+			}
+		}
+		
+		List<Direccion> direccionDelete = new ArrayList<>();
+		for(int i=0; i<direccionActual.size(); i++) {				
+			if(direccionActual.get(i).getId() != null) {				
+				if(!existDireccion(direccionEdit, direccionActual.get(i).getId())) {
+					direccionDelete.add(direccionActual.get(i));
+				}
+			}
+		}
+		
+		if(direccionDelete != null) {			
+			for(int i=0; i<direccionDelete.size(); i++) {
+				direccionActual.remove(direccionDelete.get(i));
+			}
+		}
+		
+		deleteAll(direccionDelete);
+		return (List<Direccion>) direccionDao.saveAll(direccionActual);
+	}
+
+	@Override
+	@Transactional
+	public void deleteByProveedorId(Proveedor proveedor) {
+		// TODO Auto-generated method stub
+		direccionDao.deleteByProveedorId(proveedor);
 	}
 	
 }
