@@ -131,4 +131,11 @@ public class PersonaContactoServiceImpl implements IPersonaContactoService{
 		return (List<PersonaContacto>) personaContactoDao.saveAll(personaContactoActual);
 	}
 
+	@Override
+	@Transactional
+	public void deleteByClienteId(Cliente cliente) {
+		// TODO Auto-generated method stub
+		personaContactoDao.deleteByClienteId(cliente);
+	}
+
 }

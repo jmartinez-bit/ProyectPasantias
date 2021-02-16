@@ -11,4 +11,6 @@ public interface IDireccionDao extends CrudRepository<Direccion, Long>{
 
 	public List<Direccion> findByClienteId(Cliente clienteId);
 	
+	public void deleteByClienteId(Cliente cliente);
+	
 }

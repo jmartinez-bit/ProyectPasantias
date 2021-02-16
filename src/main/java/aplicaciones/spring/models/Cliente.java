@@ -2,7 +2,6 @@ package aplicaciones.spring.models;
 
 import java.io.Serializable;
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,7 +35,7 @@ public class Cliente implements Serializable{
 	private String rubroActividad;
 	
 	private String comentarios;
-
+	
 	public Long getId() {
 		return id;
 	}

@@ -25,4 +25,5 @@ public interface IPersonaContactoService {
 	
 	public List<PersonaContacto> updatePersona(List<PersonaContacto> personaContactoEdit, List<PersonaContacto> personaContactoActual, Cliente clienteActual);
 	
+	public void deleteByClienteId(Cliente cliente);
 }

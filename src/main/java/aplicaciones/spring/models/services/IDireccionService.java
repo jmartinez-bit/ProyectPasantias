@@ -25,4 +25,5 @@ public interface IDireccionService {
 	
 	public List<Direccion> updateDireccion(List<Direccion> direccionEdit, List<Direccion> direccionActual, Cliente clienteActual);
 	
+	public void deleteByClienteId(Cliente cliente);
 }

@@ -11,4 +11,6 @@ public interface IPersonaContactoDao extends CrudRepository<PersonaContacto, Lon
 
 	public List<PersonaContacto> findByClienteId(Cliente clienteId);
 	
+	public void deleteByClienteId(Cliente cliente);
+	
 }

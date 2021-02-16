@@ -129,5 +129,12 @@ public class DireccionServiceImpl implements IDireccionService{
 		deleteAll(direccionDelete);
 		return (List<Direccion>) direccionDao.saveAll(direccionActual);
 	}
+
+	@Override
+	@Transactional
+	public void deleteByClienteId(Cliente cliente) {
+		// TODO Auto-generated method stub
+		direccionDao.deleteByClienteId(cliente);
+	}
 	
 }
