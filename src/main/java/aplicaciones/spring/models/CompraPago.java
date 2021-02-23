@@ -40,6 +40,8 @@ public class CompraPago implements Serializable{
 	
 	private String comentarios;
 	
+	private double saldo;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "compra_id")
 	private Compra compraId;
@@ -98,6 +100,14 @@ public class CompraPago implements Serializable{
 
 	public void setCompraId(Compra compraId) {
 		this.compraId = compraId;
+	}
+
+	public double getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(double saldo) {
+		this.saldo = saldo;
 	}
 	
 }

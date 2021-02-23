@@ -160,7 +160,6 @@ public class PersonaContactoServiceImpl implements IPersonaContactoService{
 						personaContactoActual.get(i).setCargo(personaContactoEdit.get(i).getCargo());
 						personaContactoActual.get(i).setCorreo(personaContactoEdit.get(i).getCorreo());
 						personaContactoActual.get(i).setNombre(personaContactoEdit.get(i).getNombre());
-						personaContactoActual.get(i).setProveedorId(personaContactoEdit.get(i).getProveedorId());
 						personaContactoActual.get(i).setTelefono(personaContactoEdit.get(i).getTelefono());
 					} else {
 						personaContactoEdit.get(i).setProveedorId(proveedorActual);

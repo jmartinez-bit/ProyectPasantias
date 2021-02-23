@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -168,6 +169,22 @@ public class ProveedorRestController {
 		personaContactoService.deleteByProveedorId(proveedor);
 		cuentaBancariaService.deleteByProveedorId(proveedor);
 		proveedorService.delete(id);
+	}
+	
+	@GetMapping("/proveedores/ruc")
+	@ResponseStatus(HttpStatus.OK)
+	public ResponseEntity<?> findByRucDni(@RequestParam (value = "rucDni") String rucDni) {
+		Map<String, Object> response = new HashMap<>();
+		
+		Proveedor proveedor = proveedorService.findByRucDni(rucDni);
+		List<Direccion> direcciones = direccionService.findByProveedorId(proveedor);
+		List<PersonaContacto> personas = personaContactoService.findByProveedorId(proveedor);
+		
+		response.put("proveedor", proveedor);
+		response.put("direccion", direcciones);
+		response.put("personaContacto", personas);
+		
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
 
 }

@@ -15,4 +15,7 @@ public interface IProveedorService {
 	public void delete(Long id);
 	
 	public Long obtenerIdUltimo();
+	
+	public Proveedor findByRucDni(String rucDni);
+	
 }

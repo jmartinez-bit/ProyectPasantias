@@ -2,8 +2,6 @@ package aplicaciones.spring.models;
 
 import java.io.Serializable;
 import java.util.Date;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -48,11 +46,11 @@ public class Compra implements Serializable{
 	
 	private String estado;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "proveedor_id")
 	private Proveedor proveedorId;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "persona_contacto_id")
 	private PersonaContacto personaContactoId;
 

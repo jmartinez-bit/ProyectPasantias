@@ -7,4 +7,7 @@ import aplicaciones.spring.models.Proveedor;
 public interface IProveedorDao extends CrudRepository<Proveedor, Long>{
 
 	Proveedor findTopByOrderByIdDesc();
+	
+	public Proveedor findByRucDni(String rucDni);
+	
 }

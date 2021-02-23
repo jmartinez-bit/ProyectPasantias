@@ -49,4 +49,11 @@ public class ProveedorServiceImpl implements IProveedorService{
 		return proveedor.getId();
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public Proveedor findByRucDni(String rucDni) {
+		// TODO Auto-generated method stub
+		return proveedorDao.findByRucDni(rucDni);
+	}
+
 }

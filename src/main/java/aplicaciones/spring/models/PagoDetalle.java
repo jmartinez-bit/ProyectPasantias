@@ -45,8 +45,6 @@ public class PagoDetalle implements Serializable{
 	@Column(name = "num_operacion")
 	private String numOperacion;
 	
-	private double saldo;
-	
 	@ManyToOne
 	@JoinColumn(name = "compra_pago_id")
 	private CompraPago compraPagoId;
@@ -113,14 +111,6 @@ public class PagoDetalle implements Serializable{
 
 	public void setNumOperacion(String numOperacion) {
 		this.numOperacion = numOperacion;
-	}
-
-	public double getSaldo() {
-		return saldo;
-	}
-
-	public void setSaldo(double saldo) {
-		this.saldo = saldo;
 	}
 
 	public CompraPago getCompraPagoId() {
