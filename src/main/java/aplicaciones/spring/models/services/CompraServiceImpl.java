@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import aplicaciones.spring.models.Compra;
+import aplicaciones.spring.models.Proveedor;
 import aplicaciones.spring.models.dao.ICompraDao;
 
 @Service
@@ -41,6 +42,13 @@ public class CompraServiceImpl implements ICompraService{
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
 		compraDao.deleteById(id);
+	}
+
+	@Override
+	@Transactional
+	public void deleteByProveedorId(Proveedor proveedor) {
+		// TODO Auto-generated method stub
+		compraDao.deleteByProveedorId(proveedor);
 	}
 
 }

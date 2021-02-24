@@ -3,8 +3,12 @@ package aplicaciones.spring.controllers;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,6 +28,8 @@ import aplicaciones.spring.models.Direccion;
 import aplicaciones.spring.models.FormProveedor;
 import aplicaciones.spring.models.PersonaContacto;
 import aplicaciones.spring.models.Proveedor;
+import aplicaciones.spring.models.ProveedorResponse;
+import aplicaciones.spring.models.services.ICompraService;
 import aplicaciones.spring.models.services.ICuentaBancariaService;
 import aplicaciones.spring.models.services.IDireccionService;
 import aplicaciones.spring.models.services.IPersonaContactoService;
@@ -44,11 +50,22 @@ public class ProveedorRestController {
 	private ICuentaBancariaService cuentaBancariaService;
 	
 	@Autowired
+	private ICompraService compraService;
+	
+	@Autowired
 	private IDireccionService direccionService;
 	
 	@GetMapping("/proveedores")
-	public List<Proveedor> index() {
-		return proveedorService.findAll();
+	public Page<ProveedorResponse> index(@RequestParam(name = "page", defaultValue = "0") int page,
+								@RequestParam(name = "size", defaultValue = "10") int size) {
+		PageRequest pageRequest = PageRequest.of(page, size);
+		Page<Proveedor> pageResult = proveedorService.findAll(pageRequest);
+		List<ProveedorResponse> proveedores = pageResult
+				.stream()
+				.map(ProveedorResponse::new)
+				.collect(Collectors.toList());
+		
+		return new PageImpl<>(proveedores, pageRequest, pageResult.getTotalElements());
 	}
 	
 	@GetMapping("/proveedores/id")
@@ -168,6 +185,7 @@ public class ProveedorRestController {
 		direccionService.deleteByProveedorId(proveedor);
 		personaContactoService.deleteByProveedorId(proveedor);
 		cuentaBancariaService.deleteByProveedorId(proveedor);
+		compraService.deleteByProveedorId(proveedor);
 		proveedorService.delete(id);
 	}
 	

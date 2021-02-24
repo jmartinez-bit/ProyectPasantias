@@ -3,6 +3,7 @@ package aplicaciones.spring.models.services;
 import java.util.List;
 
 import aplicaciones.spring.models.Compra;
+import aplicaciones.spring.models.Proveedor;
 
 public interface ICompraService {
 	
@@ -14,4 +15,6 @@ public interface ICompraService {
 	
 	public void delete(Long id);
 
+	public void deleteByProveedorId(Proveedor proveedor);
+	
 }
