@@ -48,6 +48,9 @@ public class ProveedorServiceImpl implements IProveedorService{
 	@Transactional(readOnly = true)
 	public Long obtenerIdUltimo() {
 		Proveedor proveedor = proveedorDao.findTopByOrderByIdDesc();
+		if(proveedor == null) {
+			return 0L;
+		}
 		return proveedor.getId();
 	}
 
