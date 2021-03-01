@@ -1,11 +1,14 @@
 package aplicaciones.spring.controllers;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,10 +19,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import aplicaciones.spring.models.Cliente;
+import aplicaciones.spring.models.ClienteResponse;
 import aplicaciones.spring.models.Direccion;
 import aplicaciones.spring.models.FormCliente;
 import aplicaciones.spring.models.PersonaContacto;
@@ -42,8 +47,16 @@ public class ClienteRestController {
 	private IDireccionService direccionService;
 	
 	@GetMapping("/clientes")
-	public List<Cliente> index() {
-		return clienteService.findAll();
+	public Page<ClienteResponse> index(@RequestParam(name = "page", defaultValue = "0") int page,
+			@RequestParam(name = "size", defaultValue = "10") int size) {
+		PageRequest pageRequest = PageRequest.of(page, size);
+		Page<Cliente> pageResult = clienteService.findAll(pageRequest);
+		List<ClienteResponse> clientes = pageResult
+				.stream()
+				.map(ClienteResponse::new)
+				.collect(Collectors.toList());
+		
+		return new PageImpl<>(clientes, pageRequest, pageResult.getTotalElements());
 	}
 	
 	@GetMapping("/clientes/{id}")

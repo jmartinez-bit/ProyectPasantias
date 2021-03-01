@@ -4,10 +4,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import aplicaciones.spring.models.Cliente;
+import aplicaciones.spring.models.Banco;
 
-public interface IClienteDao extends PagingAndSortingRepository<Cliente, Long>{
+public interface IBancoDao extends PagingAndSortingRepository<Banco, Long>{
 
-	public Page<Cliente> findAll(Pageable pageable);
+	public Page<Banco> findAll(Pageable pageable);
 	
 }

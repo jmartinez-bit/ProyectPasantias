@@ -6,41 +6,41 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import aplicaciones.spring.models.Cliente;
-import aplicaciones.spring.models.dao.IClienteDao;
+import aplicaciones.spring.models.Banco;
+import aplicaciones.spring.models.dao.IBancoDao;
 
 @Service
-public class ClienteServiceImpl implements IClienteService{
+public class BancoServiceImpl implements IBancoService{
 
 	@Autowired
-	private IClienteDao clienteDao;
+	private IBancoDao bancoDao;
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Page<Cliente> findAll(Pageable pageable) {
+	public Page<Banco> findAll(Pageable pageable) {
 		// TODO Auto-generated method stub
-		return clienteDao.findAll(pageable);
+		return bancoDao.findAll(pageable);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Cliente findById(Long id) {
+	public Banco findById(Long id) {
 		// TODO Auto-generated method stub
-		return clienteDao.findById(id).orElse(null);
+		return bancoDao.findById(id).orElse(null);
 	}
 
 	@Override
 	@Transactional
-	public Cliente save(Cliente cliente) {
+	public Banco save(Banco banco) {
 		// TODO Auto-generated method stub
-		return clienteDao.save(cliente);
+		return bancoDao.save(banco);
 	}
 
 	@Override
 	@Transactional
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
-		clienteDao.deleteById(id);
+		bancoDao.deleteById(id);
 	}
 
 }
