@@ -116,9 +116,11 @@ public class CuentaBancariaServiceImpl implements ICuentaBancariaService{
 		
 		for(int i=0; i<cuentas.size(); i++) {
 			CuentaBancaria c = cuentas.get(i);
-			if(c.getId().equals(id)) {
-				existe = true;
-				break;
+			if(c.getId() != null) {				
+				if(c.getId().equals(id)) {
+					existe = true;
+					break;
+				}
 			}
 		}
 		

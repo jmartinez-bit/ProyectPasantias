@@ -67,9 +67,11 @@ public class DireccionServiceImpl implements IDireccionService{
 		
 		for(int i=0; i<direcciones.size(); i++) {
 			Direccion d = direcciones.get(i);
-			if(d.getId().equals(id)) {
-				existe = true;
-				break;
+			if(d.getId() != null) {				
+				if(d.getId().equals(id)) {
+					existe = true;
+					break;
+				}
 			}
 		}
 		
@@ -150,7 +152,8 @@ public class DireccionServiceImpl implements IDireccionService{
 	@Transactional
 	public List<Direccion> updateDireccion(List<Direccion> direccionEdit, List<Direccion> direccionActual,
 			Proveedor proveedorActual) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub	
+		
 		int size = direccionActual.size();
 
 		for(int i=0; i<direccionEdit.size(); i++) {
@@ -178,8 +181,8 @@ public class DireccionServiceImpl implements IDireccionService{
 		}
 		
 		List<Direccion> direccionDelete = new ArrayList<>();
-		for(int i=0; i<direccionActual.size(); i++) {				
-			if(direccionActual.get(i).getId() != null) {				
+		for(int i=0; i<direccionActual.size(); i++) {
+			if(direccionActual.get(i).getId() != null) {
 				if(!existDireccion(direccionEdit, direccionActual.get(i).getId())) {
 					direccionDelete.add(direccionActual.get(i));
 				}
@@ -191,6 +194,7 @@ public class DireccionServiceImpl implements IDireccionService{
 				direccionActual.remove(direccionDelete.get(i));
 			}
 		}
+		
 		
 		deleteAll(direccionDelete);
 		return (List<Direccion>) direccionDao.saveAll(direccionActual);

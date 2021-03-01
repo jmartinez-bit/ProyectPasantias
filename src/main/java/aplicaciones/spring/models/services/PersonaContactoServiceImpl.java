@@ -30,7 +30,7 @@ public class PersonaContactoServiceImpl implements IPersonaContactoService{
 	public PersonaContacto findById(Long id) {
 		// TODO Auto-generated method stub
 		return personaContactoDao.findById(id).orElse(null);
-	}
+	} 
 
 	@Override
 	@Transactional
@@ -67,9 +67,11 @@ public class PersonaContactoServiceImpl implements IPersonaContactoService{
 		
 		for(int i=0; i<personas.size(); i++) {
 			PersonaContacto p = personas.get(i);
-			if(p.getId().equals(id)) {
-				existe = true;
-				break;
+			if(p.getId() != null) {				
+				if(p.getId().equals(id)) {
+					existe = true;
+					break;
+				}
 			}
 		}
 		
