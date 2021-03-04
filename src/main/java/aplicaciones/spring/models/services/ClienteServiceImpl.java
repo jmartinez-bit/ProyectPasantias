@@ -1,5 +1,7 @@
 package aplicaciones.spring.models.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,6 +43,24 @@ public class ClienteServiceImpl implements IClienteService{
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
 		clienteDao.deleteById(id);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Cliente> findAllCliente() {
+		// TODO Auto-generated method stub
+		return (List<Cliente>) clienteDao.findAll();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Long obtenerIdUltimo() {
+		// TODO Auto-generated method stub
+		Cliente cliente = clienteDao.findTopByOrderByIdDesc();
+		if(cliente == null) {
+			return 0L;
+		}
+		return cliente.getId();
 	}
 
 }

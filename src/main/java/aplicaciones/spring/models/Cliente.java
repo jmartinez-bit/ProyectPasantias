@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Cliente implements Serializable{
@@ -29,6 +31,7 @@ public class Cliente implements Serializable{
 	private String razonSocial;
 
 	@Column(name="fecha_ini")
+	@Temporal(TemporalType.DATE)
 	private Date fechaIni;
 	
 	@Column(name="rubro_actividad")

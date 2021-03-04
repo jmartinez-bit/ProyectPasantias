@@ -59,6 +59,19 @@ public class ClienteRestController {
 		return new PageImpl<>(clientes, pageRequest, pageResult.getTotalElements());
 	}
 	
+	@GetMapping("/clientes/id")
+	public ResponseEntity<?> obtenerId() {
+		Map<String, Object> response = new HashMap<>();
+		response.put("identificador", clienteService.obtenerIdUltimo());
+		
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+	}
+	
+	@GetMapping("/clientes/all")
+	public List<Cliente> clientes() {
+		return clienteService.findAllCliente();
+	}
+	
 	@GetMapping("/clientes/{id}")
 	public ResponseEntity<?> show(@PathVariable Long id) {
 		

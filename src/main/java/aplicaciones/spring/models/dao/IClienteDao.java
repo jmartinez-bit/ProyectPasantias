@@ -10,4 +10,6 @@ public interface IClienteDao extends PagingAndSortingRepository<Cliente, Long>{
 
 	public Page<Cliente> findAll(Pageable pageable);
 	
+	Cliente findTopByOrderByIdDesc();
+	
 }
