@@ -45,6 +45,11 @@ public class BancoRestController {
 		return new PageImpl<>(bancos, pageRequest, pageResult.getTotalElements());
 	}
 	
+	@GetMapping("/bancos/all")
+	public List<Banco> bancos() {
+		return bancoService.findAllBancos();
+	}
+	
 	@GetMapping("/bancos/{id}")
 	public Banco show(@PathVariable Long id) {
 		return bancoService.findById(id);

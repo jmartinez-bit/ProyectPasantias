@@ -1,5 +1,7 @@
 package aplicaciones.spring.models.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,6 +43,13 @@ public class BancoServiceImpl implements IBancoService{
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
 		bancoDao.deleteById(id);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Banco> findAllBancos() {
+		// TODO Auto-generated method stub
+		return (List<Banco>) bancoDao.findAll();
 	}
 
 }

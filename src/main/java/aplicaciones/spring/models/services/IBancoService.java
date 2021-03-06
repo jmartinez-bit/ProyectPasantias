@@ -17,4 +17,6 @@ public interface IBancoService {
 	
 	public void delete(Long id);
 	
+	public List<Banco> findAllBancos();
+	
 }
