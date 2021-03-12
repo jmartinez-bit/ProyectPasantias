@@ -36,9 +36,15 @@ public class DatoFamiliar implements Serializable{
 	@Column(name="s_apellido")
 	private String sApellido;
 	
+	@Column(name="tipo_doc")
+	private String tipoDoc;
+	
+	@Column(name="num_doc")
+	private String numDoc;
+	
 	@Column(name="fecha_nac")
 	private Date fechaNac;
-	private String dni;
+	private String nacionalidad;
 	private String direccion;
 	private String pais;
 	private String departamento;
@@ -46,11 +52,11 @@ public class DatoFamiliar implements Serializable{
 	private String distrito;
 	private String ubigeo;
 	
-	@Column(name="num_hijos")
-	private int numHijos;
-	
 	@Column(name="per_contacto")
 	private String perContacto;
+	
+	@Column(name="num_contacto")
+	private String numContacto;
 	private String relacion;
 	
 	@OneToOne
@@ -105,14 +111,6 @@ public class DatoFamiliar implements Serializable{
 		this.fechaNac = fechaNac;
 	}
 
-	public String getDni() {
-		return dni;
-	}
-
-	public void setDni(String dni) {
-		this.dni = dni;
-	}
-
 	public String getDireccion() {
 		return direccion;
 	}
@@ -161,14 +159,6 @@ public class DatoFamiliar implements Serializable{
 		this.ubigeo = ubigeo;
 	}
 
-	public int getNumHijos() {
-		return numHijos;
-	}
-
-	public void setNumHijos(int numHijos) {
-		this.numHijos = numHijos;
-	}
-
 	public String getPerContacto() {
 		return perContacto;
 	}
@@ -191,6 +181,38 @@ public class DatoFamiliar implements Serializable{
 
 	public void setDatoPersonalId(DatoPersonal datoPersonalId) {
 		this.datoPersonalId = datoPersonalId;
+	}
+
+	public String getTipoDoc() {
+		return tipoDoc;
+	}
+
+	public void setTipoDoc(String tipoDoc) {
+		this.tipoDoc = tipoDoc;
+	}
+
+	public String getNumDoc() {
+		return numDoc;
+	}
+
+	public void setNumDoc(String numDoc) {
+		this.numDoc = numDoc;
+	}
+
+	public String getNacionalidad() {
+		return nacionalidad;
+	}
+
+	public void setNacionalidad(String nacionalidad) {
+		this.nacionalidad = nacionalidad;
+	}
+
+	public String getNumContacto() {
+		return numContacto;
+	}
+
+	public void setNumContacto(String numContacto) {
+		this.numContacto = numContacto;
 	}
 
 }

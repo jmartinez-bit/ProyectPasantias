@@ -3,6 +3,7 @@ package aplicaciones.spring.models.services;
 import java.util.List;
 
 import aplicaciones.spring.models.DatoFamiliar;
+import aplicaciones.spring.models.DatoPersonal;
 
 public interface IDatoFamiliarService {
 
@@ -13,4 +14,7 @@ public interface IDatoFamiliarService {
 	public DatoFamiliar save(DatoFamiliar datoFamiliar);
 	
 	public void delete(Long id);
+	
+	public DatoFamiliar findByDatoPersonal(DatoPersonal datoPersonal);
+	
 }

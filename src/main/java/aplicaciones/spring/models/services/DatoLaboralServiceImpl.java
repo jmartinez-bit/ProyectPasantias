@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import aplicaciones.spring.models.DatoLaboral;
+import aplicaciones.spring.models.DatoPersonal;
 import aplicaciones.spring.models.dao.IDatoLaboralDao;
 
 @Service
@@ -39,6 +40,13 @@ public class DatoLaboralServiceImpl implements IDatoLaboralService{
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
 		datoLaboralDao.deleteById(id);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public DatoLaboral findByDatoPersonal(DatoPersonal datoPersonal) {
+		// TODO Auto-generated method stub
+		return datoLaboralDao.findByDatoPersonalId(datoPersonal);
 	}
 
 }

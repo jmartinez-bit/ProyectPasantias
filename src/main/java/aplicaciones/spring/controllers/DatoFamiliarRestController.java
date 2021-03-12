@@ -50,11 +50,9 @@ public class DatoFamiliarRestController {
 		datoFamiliarActual.setDepartamento(datoFamiliar.getDepartamento());
 		datoFamiliarActual.setDireccion(datoFamiliar.getDireccion());
 		datoFamiliarActual.setDistrito(datoFamiliar.getDistrito());
-		datoFamiliarActual.setDni(datoFamiliar.getDni());
 		datoFamiliarActual.setEstadoCivil(datoFamiliar.getEstadoCivil());
 		datoFamiliarActual.setFechaNac(datoFamiliar.getFechaNac());
 		datoFamiliarActual.setNombres(datoFamiliar.getNombres());
-		datoFamiliarActual.setNumHijos(datoFamiliar.getNumHijos());
 		datoFamiliarActual.setPais(datoFamiliar.getPais());
 		datoFamiliarActual.setpApellido(datoFamiliar.getpApellido());
 		datoFamiliarActual.setPerContacto(datoFamiliar.getPerContacto());

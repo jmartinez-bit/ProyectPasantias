@@ -63,9 +63,17 @@ public class DatoPersonal implements Serializable{
 	@Column(name="sis_pensiones")
 	private String sisPensiones;
 	
-	@Column(name="op_pensiones")
-	private String opPensiones;
 	private String cuspp;
+	
+	private String banco;
+	
+	@Column(name="tipo_cuenta")
+	private String tipoCuenta;
+	
+	@Column(name="num_cuenta")
+	private String numCuenta;
+	private String cci;
+	
 	public Long getId() {
 		return id;
 	}
@@ -186,17 +194,34 @@ public class DatoPersonal implements Serializable{
 	public void setSisPensiones(String sisPensiones) {
 		this.sisPensiones = sisPensiones;
 	}
-	public String getOpPensiones() {
-		return opPensiones;
-	}
-	public void setOpPensiones(String opPensiones) {
-		this.opPensiones = opPensiones;
-	}
 	public String getCuspp() {
 		return cuspp;
 	}
 	public void setCuspp(String cuspp) {
 		this.cuspp = cuspp;
 	}
-	
+	public String getBanco() {
+		return banco;
+	}
+	public void setBanco(String banco) {
+		this.banco = banco;
+	}
+	public String getTipoCuenta() {
+		return tipoCuenta;
+	}
+	public void setTipoCuenta(String tipoCuenta) {
+		this.tipoCuenta = tipoCuenta;
+	}
+	public String getNumCuenta() {
+		return numCuenta;
+	}
+	public void setNumCuenta(String numCuenta) {
+		this.numCuenta = numCuenta;
+	}
+	public String getCci() {
+		return cci;
+	}
+	public void setCci(String cci) {
+		this.cci = cci;
+	}
 }
