@@ -25,8 +25,6 @@ public class DatoLaboral implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	private String historial;
-	
 	@Column(name="fecha_ing")
 	private Date fechaIng;
 	
@@ -62,14 +60,6 @@ public class DatoLaboral implements Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getHistorial() {
-		return historial;
-	}
-
-	public void setHistorial(String historial) {
-		this.historial = historial;
 	}
 
 	public Date getFechaIng() {

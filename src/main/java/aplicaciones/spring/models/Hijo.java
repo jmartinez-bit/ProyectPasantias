@@ -32,7 +32,7 @@ public class Hijo implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name = "dato_familiar_id")
-	private DatoFamiliar datoFamilarId;
+	private DatoFamiliar datoFamiliarId;
 
 	public Long getId() {
 		return id;
@@ -66,11 +66,11 @@ public class Hijo implements Serializable{
 		this.dni = dni;
 	}
 
-	public DatoFamiliar getDatoFamilarId() {
-		return datoFamilarId;
+	public DatoFamiliar getDatoFamiliarId() {
+		return datoFamiliarId;
 	}
 
-	public void setDatoFamilarId(DatoFamiliar datoFamilarId) {
-		this.datoFamilarId = datoFamilarId;
+	public void setDatoFamiliarId(DatoFamiliar datoFamiliarId) {
+		this.datoFamiliarId = datoFamiliarId;
 	}
 }
